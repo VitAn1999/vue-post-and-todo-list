@@ -26,7 +26,6 @@
 import TodoList from '@/components/TodoList.vue';
 import AddTodo from '@/components/AddTodo.vue';
 import Loader from '@/components/Loader.vue';
-
 export default {
   components: {
     TodoList,
@@ -44,8 +43,8 @@ export default {
     removeTodo(id) {
       this.todos = this.todos.filter((t) => t.id !== id);
     },
-    addTodo(newTodo) {
-      this.todos.push(newTodo);
+    addTodo(todo) {
+      this.todos.push(todo);
     },
   },
   computed: {
