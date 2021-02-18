@@ -1,33 +1,24 @@
 <template>
   <div id="app" class="container">
-    <h1>Todo appliction</h1>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/todos">Todo</router-link>
-    </div>
+    <ul class="nav nav-pills justify-content-end mt-2 mb-4">
+      <li class="nav-item">
+        <router-link class="nav-link" exact to="/" active-class="active"
+          >POSTS</router-link
+        >
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/todos" active-class="active"
+          >TODOS</router-link
+        >
+      </li>
+    </ul>
+
     <router-view />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+<style scoped>
+li {
+  padding-right: 3rem;
 }
 </style>

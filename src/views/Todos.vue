@@ -1,6 +1,6 @@
 <template>
-  <div class="about">
-    <h2 class="text-center">This is an todo list</h2>
+  <div class="about mt-5">
+    <h2 class="text-center ">This is an your todo list</h2>
     <hr />
     <add-todo @add-todo="addTodo"></add-todo>
     <select
@@ -12,7 +12,9 @@
       <option value="completed">Completed</option>
       <option value="not-completed">Not Complited</option>
     </select>
-    <loader v-if="loading"></loader>
+    <div v-if="loading" class="text-center">
+      <loader></loader>
+    </div>
     <todo-list
       v-else-if="this.filteredTodos.length !== 0"
       :todos="filteredTodos"

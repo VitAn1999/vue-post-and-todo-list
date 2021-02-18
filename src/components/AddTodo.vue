@@ -6,8 +6,8 @@
       class="form-control"
       placeholder="Add todo..."
     />
-    <button type="submit" :disabled="!value" class="btn btn-success ml-5">
-      Add todo
+    <button type="submit" :disabled="!value" class="btn btn-primary ml-5">
+      ADD TODO
     </button>
   </form>
 </template>

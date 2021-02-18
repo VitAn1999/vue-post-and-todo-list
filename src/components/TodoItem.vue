@@ -9,9 +9,11 @@
       />
       {{ index + 1 }}. {{ todo.title | uppercase }}
     </label>
-    <button @click="$emit('remove-value', todo.id)" class="btn btn-danger">
-      X
-    </button>
+    <button
+      @click="$emit('remove-value', todo.id)"
+      class="btn-close"
+      aria-label="Close"
+    ></button>
   </li>
 </template>
 
