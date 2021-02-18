@@ -34,37 +34,33 @@ export default {
   },
   data() {
     return {
-      todos: [],
       loading: true,
       filter: 'all',
     };
   },
   methods: {
     removeTodo(id) {
-      this.todos = this.todos.filter((t) => t.id !== id);
+      this.$store.dispatch('removeTodo', id);
     },
     addTodo(todo) {
-      this.todos.push(todo);
+      this.$store.dispatch('createTodo', todo);
     },
+  },
+  mounted() {
+    this.$store.dispatch('fetchTodo').finally(() => {
+      this.loading = false;
+    });
   },
   computed: {
     filteredTodos() {
       if (this.filter === 'all') {
-        return this.todos;
+        return this.$store.getters.loadAllTodos;
       } else if (this.filter === 'completed') {
-        return this.todos.filter((t) => t.completed);
+        return this.$store.getters.loadCompletedTodo;
       } else {
-        return this.todos.filter((t) => !t.completed);
+        return this.$store.getters.loadNotCompletedTodo;
       }
     },
-  },
-  created() {
-    fetch('https://jsonplaceholder.typicode.com/todos?_limit=5')
-      .then((response) => response.json())
-      .then((json) => {
-        this.todos = json;
-        this.loading = false;
-      });
   },
 };
 </script>

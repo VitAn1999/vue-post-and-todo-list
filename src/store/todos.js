@@ -14,13 +14,33 @@ export default {
     loadAllTodos(state) {
       return state.todos;
     },
+    loadCompletedTodo(state) {
+      return state.todos.filter((t) => t.completed);
+    },
+    loadNotCompletedTodo(state) {
+      return state.todos.filter((t) => !t.completed);
+    },
   },
   mutations: {
     createTodo(state, payload) {
       state.todos.push(payload);
     },
+    changeCompleted(state, payload) {
+      const newState = [];
+      state.todos.forEach((t) => {
+        if (t.id === payload.id) {
+          newState.push(payload);
+        } else {
+          newState.push(t);
+        }
+      });
+      state.todos = newState;
+    },
     loadTodos(state, payload) {
       state.todos = payload;
+    },
+    removeTodo(state, payload) {
+      state.todos = state.todos.filter((t) => t.id !== payload);
     },
   },
   actions: {
@@ -34,6 +54,25 @@ export default {
         ...newTodo,
         id: todo.key,
       });
+    },
+    async changeCompleted(context, payload) {
+      await fb
+        .database()
+        .ref('todos')
+        .child(payload.id)
+        .update({
+          completed: !payload.completed,
+        });
+      const editTodo = new Todo(payload.title, !payload.completed, payload.id);
+      context.commit('changeCompleted', editTodo);
+    },
+    async removeTodo(context, payload) {
+      await fb
+        .database()
+        .ref('todos')
+        .child(payload)
+        .remove();
+      context.commit('removeTodo', payload);
     },
     async fetchTodo(context) {
       const fbTodo = await fb

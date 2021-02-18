@@ -3,7 +3,7 @@
     <label :class="{ done: todo.completed }">
       <input
         type="checkbox"
-        @change="todo.completed = !todo.completed"
+        @change="changeCompleted"
         :checked="completed"
         class="form-check"
       />
@@ -26,6 +26,16 @@ export default {
   filters: {
     uppercase(value) {
       return value.toUpperCase();
+    },
+  },
+  methods: {
+    changeCompleted() {
+      const todo = {
+        title: this.todo.title,
+        completed: this.todo.completed,
+        id: this.todo.id,
+      };
+      this.$store.dispatch('changeCompleted', todo);
     },
   },
 };

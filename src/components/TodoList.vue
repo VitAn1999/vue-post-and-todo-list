@@ -25,9 +25,6 @@ export default {
     removeValue(id) {
       this.$emit('remove-todo', id);
     },
-    addTodo(todo) {
-      this.todos.push(todo);
-    },
   },
 };
 </script>
