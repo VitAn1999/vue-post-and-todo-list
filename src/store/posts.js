@@ -13,7 +13,7 @@ export default {
   },
   getters: {
     loadAllPosts(state) {
-      return state.posts.reverse();
+      return state.posts;
     },
     showCountPosts(state) {
       return state.posts.length;
@@ -42,7 +42,7 @@ export default {
         const post = posts[key];
         newPosts.push(new Post(post.title, post.body, key));
       });
-      context.commit('loadPosts', newPosts);
+      context.commit('loadPosts', newPosts.reverse());
     },
     async createPost(context, payload) {
       const newPost = new Post(payload.title, payload.body);
